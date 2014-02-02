@@ -10,7 +10,7 @@ html(lang="en")
 			.row
 				.col-lg-9.col-md-9.col-sm-12.col-xs-12
 					.main-content
-						include _index/article
+						include _mixins/article
 						- page.posts.each(function(article) {
 							mixin article(article)
 						- });
@@ -19,7 +19,12 @@ html(lang="en")
 						
 				.col-lg-3.col-md-3.col-sm-12.col-xs-12
 					.sidebar-content
-						include _sidebar/sidebar
+						aside
+							include author
+							include category
+							include lively
+							include dynamic
+							include visitors
 
 		include _partial/footer
 		include _duoshuo/import
