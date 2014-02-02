@@ -1,0 +1,25 @@
+doctype
+html(lang="en")
+	include _partial/head
+
+	body
+		include _post/prettify
+		include _partial/header
+
+		.blog-conteinr.container.container-sd
+			.row
+				.col-lg-9.col-md-9.col-sm-12.col-xs-12
+					.main-content
+						include _index/article
+						- page.posts.each(function(article) {
+							mixin article(article)
+						- });
+
+					include _partial/pagination
+						
+				.col-lg-3.col-md-3.col-sm-12.col-xs-12
+					.sidebar-content
+						include _sidebar/sidebar
+
+		include _partial/footer
+		include _duoshuo/import
