@@ -2,9 +2,6 @@
 
 # 网站定义, 优先这里的定义, 如果没有会倒 hexo 根目录的 _config.yml 里面提取
 site:
-	title: iShgo 团队博客
-	subtitle: iShgo 团队博客
-	description: iShgo 技术交流博客
 	ico:
 		ico/apple-touch-icon-144-precomposed.png:
 			size: 144x144
@@ -25,7 +22,7 @@ site:
 menu:
 	home: /
 	archives: /archives
-	about: /about
+	about: http://about.ishgo.cn
 
 
 # 侧栏
@@ -46,25 +43,25 @@ sidebar:
 # 友情链接
 links:
 	github:
-		icon: icon-github
+		icon: fa-github
 		url: https://github.com
 		descript: github
 
 	twitter:
-		icon: icon-twitter
+		icon: fa-twitter
 		url: https://twitter.com/twbootstrap
 		descript: Twitter
 
 	google_plus:
-		icon: icon-google-plus
+		icon: fa-google-plus
 		url: https://plus.google.com/
 		descript: Google+
 
 # 作者
-## face		 头像
-## name		 名字
+## face			头像
+## name			名字
 ## signature	个人签名
-## profile	  个人主页 (名字的连接)
+## profile		个人主页 (名字的连接)
 ## other		其他主页 必须对应下面 ico
 author:
 	David:
@@ -93,22 +90,17 @@ author:
 ## 对应上面的其他主页必须定义才能显示, 否则不能显示
 ## 若要添加, 请自行添加特殊的 icons
 ico:
-	weibo: icon-weibo
-	twitter: icon-twitter
-	facebook: icon-facebook
-	google_plus: icon-google-plus
-	github: icon-github
-	bitbucket: icon-bitbucket
+	weibo: fa-weibo
+	twitter: fa-twitter
+	facebook: fa-facebook
+	google_plus: fa-google-plus
+	github: fa-github
+	bitbucket: fa-bitbucket
 
 
 # CDN
 cdn:
 	jQuery: http://code.jquery.com/jquery.min.js
-
-
-# 代码着色
-prettify:
-	enable: false
 
 
 # 多说评论
