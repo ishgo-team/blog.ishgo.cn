@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>addslashes, mysql_real_escape_string并不能防止SQL注入!!! - ishgo 团队技术交流博客</title><meta name="author" content="Barbery"><meta name="description" content="博客主要用于网站营运, web技术交流, web设计与用户体验交流, 开源项目技术交流。"><meta property="og:title" content="addslashes, mysql_real_escape_string并不能防止SQL注入!!!"><meta property="og:site_name" content="ishgo 团队技术交流博客"><meta property="og:image"><link href="/ico/logo-icon.png" sizes="144x144" rel="apple-touch-icon-precomposed"><link href="/ico/logo-icon.png" rel="shortcut icon"><link href="/css/bootstrap.css" rel="stylesheet"><link href="/css/font-awesome.css" rel="stylesheet"><link href="/css/ishgo.css" rel="stylesheet"><script src="/scripts/libs/modernizr.js" type="text/javascript"></script><script src="/scripts/libs/css3-mediaqueries.js" type="text/javascript"></script><!-- if lt IE 7link(href= config.root + "css/ie6normore.css", rel="stylesheet", type="text/css")
+--><!-- if lt IE 9script(src= config.root + "scripts/libs/html5.js", type="text/javascript")
+script(src= config.root + "scripts/libs/respond.js", type="text/javascript")--></head><body><!-- if lt IE 8.ie6nomore-container
+ .wrap
+  h1 谢绝ie6或低版本浏览器访问, 请升级浏览器再访问
+  p 微软
+   code ie6
+   发布于2001年末, 在当时是相当好的浏览器, 但现在已经 outdate 已久。
+  p
+   code ie6
+   不支持
+   code HTML5
+   , 不支持
+   code CSS3
+   , 不支持透明
+   code PNG
+   , 不稳定, 还有一系列得
+   code 安全问题
+  p 微软一贯建议用户升级到最新版本的微软浏览器，最新版本的
+   code ie
+   在速度、安全和稳定性上进行了改进，并为方便用户添加了众多新功能。
+  p 不过我们还是建议您安装
+   code Chrome
+   或者
+   code Firefox
+   这两款主流浏览器
+  p 主流网站如
+   code YouTube
+   ,
+   code Digg
+   ,
+   code Orkut
+   ,
+   code Facebook
+   等正在抵制
+   code ie6
+   , 如果可能, 更希望
+   code ie6
+   能在一夜之间消失。
+  h3 因此为了你能体验互联网各种有趣内容和崭新得技术, 请自行升级版本 O(∩_∩)O 谢谢, 因此为你带来不便敬请原谅!
+  p 更新版本可以点击这里: 
+   a.upgrade(href="http://windows.microsoft.com/zh-cn/windows/home") 新版ie
+   a.upgrade(href="http://firefox.com.cn/") 新版FireFox
+   a.upgrade(href="http://www.google.cn/intl/zh-CN/chrome/browser/") 新版 Chrome
+  p.pull-right Support
+   a.ie6nomore(href="http://www.ie6nomore.com/") ie6 No More
+   span.copyright By 
+    a(href= config.url + config.root) iShgo Team--><header id="header" role="banner" class="navbar navbar-inverse navbar-static-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#header" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><div class="icon-bar"></div><div class="icon-bar"></div><div class="icon-bar"></div></button><a href="/" class="navbar-brand">ishgo</a></div><nav role="navigation" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="http://about.ishgo.cn">关于我们</a></li></ul></nav></div></header><div class="post_container container"><div class="row"><div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"><div class="article-content"><header><a href="" title="addslashes, mysql_real_escape_string并不能防止SQL注入!!!" class="title"><h1>addslashes, mysql_real_escape_string并不能防止SQL注入!!!</h1></a><div class="post-info clearfix"><div class="author"><i class="fa fa-user"></i><a href="http://www.stutostu.com/?page_id=5" title="Barbery" rel="author" class="name">&nbsp;By&nbsp;<span>Barbery</span></a></div><div class="tags"><i class="fa fa-tags"></i>&nbsp;<a href="/tags/ADDSLASHES/" title="ADDSLASHES">ADDSLASHES</a><a href="/tags/MYSQL_REAL_ESCAPE_STRING/" title="MYSQL_REAL_ESCAPE_STRING">MYSQL_REAL_ESCAPE_STRING</a><a href="/tags/PDO/" title="PDO">PDO</a><a href="/tags/PHP/" title="PHP">PHP</a></div><time datetime="2013-09-07T23:56:29.000Z" class="date"><i class="fa fa-clock-o"></i>&nbsp;<span>Sep 8 2013</span></time></div></header><article class="prettify"><p>先看代码...</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="preprocessor">&lt;?php</span>
+    header(<span class="string">'Content-Type: text/html; charset=GBK'</span>);
+    <span class="variable">$input</span> = chr(<span class="number">0xbf</span>) . chr(<span class="number">0x27</span>) . <span class="string">' OR username = username; /*'</span>;
+    <span class="variable">$value</span> = addslashes(<span class="variable">$input</span>);  
+    <span class="variable">$sql</span> = <span class="string">"SELECT * FROM users WHERE username='{$value}' AND password='123123';"</span>;
+
+    <span class="keyword">echo</span> <span class="variable">$value</span>;
+    <span class="keyword">echo</span> <span class="variable">$sql</span>;
+<span class="preprocessor">?&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>以上的demo, 输出结果为:
+<img src="http://ww3.sinaimg.cn/large/6915c7dcgw1e8d0o3a0l1j20lu02uq3c.jpg" alt="http://ww3.sinaimg.cn/large/6915c7dcgw1e8d0o3a0l1j20lu02uq3c.jpg"></p>
+<p>看出问题了吗???</p>
+<p><a id="more"></a>
+ok, 再来一个, 如果执行上图的sql,结果为: </p>
+<p><img src="http://t3.qpic.cn/mblogpic/1ec6802af45da8f8cdfa/460" alt="http://t3.qpic.cn/mblogpic/1ec6802af45da8f8cdfa/460"> </p>
+<p>看到木有… 瞬间就可以被爆表~~</p>
+<p>你也许会疑问, 为什么addslashes没有生效~~ 对于一个单引号 &#39; 来说, addslashes 是有效果的, 但是这里不是一个实体的单引号字符.. 我们再看回去$value的赋值</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="variable">$input</span> = chr(<span class="number">0xbf</span>) . chr(<span class="number">0x27</span>) . <span class="string">' OR username = username; /*'</span>;
+</pre></td></tr></table></figure>
+
+
+<p>chr(0xbf) 和 chr(0x27)相连接, 构成一个双字节字符(0xbf27)… 而0xbf27只是一个人为合成的双字节, 不在GBK编码表里, 也就是说不是一个合法的GBK双字节字符… 系统会把这个双字节拆分为2个单字节解析(也就是0xbf和0x27), 而addslashes并不知道它是非法的双字节字符, 单引号的GBK编码就是chr(0x27), 单独使用使addslashes是可以识别的...
+我使用mysql_real_escape_string测试结果也一样, 无法识别这个非法的GBK双字节字符, 虽然无法识别, 但是使用mysql_query sql却没有绕过mysql的内部系统, 执行结果是空行数...上网搜了一下, 网友说在mysql 5.0的某个版本被修复鸟~~ 但是mysql的更新链接已经失效, 所以也无法追寻是哪个版本后修复了这个问题… 但是手动复制sql进去phpmyadmin下执行 是可以执行的~~ 知道的朋友, 可以交流下!!</p>
+<p>附上测试脚本: <a href="https://github.com/Barbery/blog/blob/master/sql_inject_test.php" target="_blank"><a href="https://github.com/Barbery/blog/blob/master/sql_inject_test.php">https://github.com/Barbery/blog/blob/master/sql_inject_test.php</a></a>
+关于上面说的, 大家有什么不懂或需要详细了解, 推荐阅读:
+<a href="http://shiflett.org/blog/2006/jan/addslashes-versus-mysql-real-escape-string" target="_blank"><a href="http://shiflett.org/blog/2006/jan/addslashes-versus-mysql-real-escape-string">http://shiflett.org/blog/2006/jan/addslashes-versus-mysql-real-escape-string</a></a>
+<a href="http://ilia.ws/archives/103-mysql_real_escape_string-versus-Prepared-Statements.html" target="_blank"><a href="http://ilia.ws/archives/103-mysql_real_escape_string-versus-Prepared-Statements.html">http://ilia.ws/archives/103-mysql_real_escape_string-versus-Prepared-Statements.html</a></a></p>
+<h3 id="-">解决办法:</h3>
+<p>使用PDO进行SQL操作..</p>
+<blockquote>
+<p>Prepared statements are 2 round-trips to the database for a single query.</p>
+<p>As soon as you prepare a query, it&#39;s sent to the database with the placeholders you set. So the database engine takes that prepared statement and maps out the query and optimizes it for execution. Then when you call execute() only the values you give are sent to the database, with a reference to that query you just prepared. The database engine drops in the values and runs the query. This is totally immune to SQL injection, because the database engine already knows exactly where the values begin and end (the placeholder marker(s) you set), and therefore never need escaping.</p>
+<p>The reason SQL injection exists in the first place is because the entire query is interpreted upon execution, values and all. So if anything interferes with the quotes surrounding your values, the engine thinks that value has ended earlier than it really should, and thus a security hole is introduced. That problem is avoided entirely with prepared statements by letting the database engine know ahead of time exactly where to put each value you pass to it later on. There is no need for escaping and there is no need to worry.</p>
+</blockquote>
+<p>简单点说就是, 通过PDO的prepared来预处理, PDO在执行1条SQL语句时会发送2条指令, 1是要执行的SQL指令, 但是没有进行赋值, MYSQL对将要处理的SQL进行优化, 然后PDO再发送1条指令, 这条指令就是上条指令需要用到的变量, MYSQL收到后进行赋值然后执行, 这样就可以消除SQL注入...</p>
+<p>再简单点说就是, 例如SQL为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre> <span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> username=<span class="string">'barbery'</span>;</span>
+</pre></td></tr></table></figure>
+
+<p>只发送1条指令的情况下, mysql要从这条SQL中提取出barbery, 所以就会存在没转义, 等的注入攻击..</p>
+<p>而如果使用PDO的话, 第一条指令会是这样发送</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="operator"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> username=?;</span>
+</pre></td></tr></table></figure>
+
+<p>然后第二条指令再把变量值 barbery发送过去...MYSQL接受到第一条指令时就使用编译器进行优化(使用什么索引等等), 就把指令的执行内容和范围给确定了, 后面传过来的值是什么, 都不会影响SQL的执行内容...</p>
+<p>这里建议阅读 <a href="http://zhangxugg-163-com.iteye.com/blog/1835721" target="_blank"><a href="http://zhangxugg-163-com.iteye.com/blog/1835721">http://zhangxugg-163-com.iteye.com/blog/1835721</a></a> 获得更直观的了解~~</p>
+</article><div class="tags_wrap clearfix"><div class="caption"><i class="fa fa-tags"></i>&nbsp;</div><ul class="tags"><li><a href="/tags/ADDSLASHES/" title="ADDSLASHES">ADDSLASHES</a></li><li><a href="/tags/MYSQL_REAL_ESCAPE_STRING/" title="MYSQL_REAL_ESCAPE_STRING">MYSQL_REAL_ESCAPE_STRING</a></li><li><a href="/tags/PDO/" title="PDO">PDO</a></li><li><a href="/tags/PHP/" title="PHP">PHP</a></li><li><a href="/tags/SQL注入/" title="SQL注入">SQL注入</a></li></ul></div><div class="categories_wrap clearfix"><div class="caption"><i class="fa fa-archive"></i>&nbsp;</div><ul class="categorie"><li><a href="/categories/PHP/" title="PHP">PHP</a></li></ul></div><div class="jiathis_style share_wrap clearfix"><div class="caption"></div><span class="jiathis_txt"></span><a class="jiathis_button_ishare">一键分享</a><a class="jiathis_button_tsina">新浪微博</a><a class="jiathis_button_tqq">腾讯微博</a><a class="jiathis_button_fb">Facebook</a><a class="jiathis_button_twitter">Twitter</a><a class="jiathis_button_googleplus">Google+</a><a href="http://www.jiathis.com/share?uid=1832206" target="_blank" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis">更多</a></div><div class="pagination"><a href="/2013/09/15/ishgohexo团队博客主题/" title="用Hexo快速打造静态博客" class="prev">用Hexo快速打造静态博客</a><a href="/2013/09/07/ishgo团队技术博客成立啦/" title="ishgo团队技术博客成立啦!!!!" class="next">ishgo团队技术博客成立啦!!!!</a></div><div class="comments_wrap clearfix"><section class="comments"><h4>评论交流</h4><span data-thread-key="2013%2F09%2F08%2Faddslashes%2Cmysql_real_escape_string%E5%B9%B6%E4%B8%8D%E8%83%BD%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5%2F" data-url="http://blog.ishgo.cn/2013/09/08/addslashes,mysql_real_escape_string并不能防止SQL注入/" data-title="addslashes, mysql_real_escape_string并不能防止SQL注入!!!" data-count-type="comments" class="ds-thread"></span></section></div></div></div><div class="lg-4 col-md-4 col-sm-12 col-xs-12"><div class="sidebar-content"><aside><div class="author_wrap module"><a href="http://www.stutostu.com/?page_id=5" title="Barbery" class="author"><h4 class="caption">@Barbery</h4></a><div class="content"><a title="Barbery" href="http://www.stutostu.com/?page_id=5" role="author" target="_blank" class="face"><img src="http://tp1.sinaimg.cn/1763035100/180/1293205008/1"></a><div class="signature">个人签名：加油!骚年~ 你的问题主要是读书不多,而想得太多(T_T)...</div><div class="links"><a href="http://weibo.com/stutostu" target="_blank" class="link"><i class="fa fa-weibo"></i></a><a href="https://plus.google.com/111756747266879940955" target="_blank" class="link"><i class="fa fa-google-plus"></i></a><a href="https://github.com/Barbery" target="_blank" class="link"><i class="fa fa-github"></i></a></div></div></div><div class="category_wrap module"><h4 class="caption">文章分类</h4><div class="content"><ul class="list"><li><a href="/categories/PHP/" title="PHP">PHP</a></li><li><a href="/categories/其他/" title="其他">其他</a></li><li><a href="/categories/前端/" title="前端">前端</a></li></ul></div></div><div class="lively_wrap module"><h4 class="caption">热门文章</h4><div class="content"><ul data-range="weekly" data-num-items="5" class="ds-top-threads"></ul></div></div><div class="dynamic_wrap module"><h4 class="caption">最新动态</h4><div class="content"><ul data-num-items="10" class="ds-recent-comments"></ul></div></div><div class="visitors_wrap module"><h4 class="caption">最近访客</h4><div class="content"><ul data-num-items="10" class="ds-recent-visitors"></ul></div></div></aside></div></div></div></div><footer id="footer"><script type="text/javascript">var _hmt = _hmt || [];
+(function() {
+ var hm = document.createElement("script");
+ hm.src = "//hm.baidu.com/hm.js?47e4c82bef82fd59f14adad5b8d9e28e";
+ var s = document.getElementsByTagName("script")[0];
+ s.parentNode.insertBefore(hm, s);
+})();</script><div rol="contentinfo" class="container"><div class="links clearfix"><a href="https://github.com" title="github" class="link"><i class="fa fa-github"></i></a><a href="https://twitter.com/twbootstrap" title="twitter" class="link"><i class="fa fa-twitter"></i></a><a href="https://plus.google.com/" title="google_plus" class="link"><i class="fa fa-google-plus"></i></a></div><p class="copyright clearfix">Powered by<a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo&nbsp;</a>and Theme by<a href="http://blog.ishgo.cn" target="_blank" title="ishgo">iShgo&nbsp;</a>© 2013</p></div></footer><script type="text/javascript">var duoshuoQuery = {short_name: "blogishgo"};
+(function() {
+ var ds = document.createElement('script');
+ ds.type = 'text/javascript';ds.async = true;
+ ds.src = 'http://static.duoshuo.com/embed.js';
+ ds.charset = 'UTF-8';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script><script type="text/javascript">var jiathis_config = {
+ data_track_clickback: true,
+ sm: "copy,renren,cqq",
+ pic: "",
+ summary: ""
+};</script><script src="http://v3.jiathis.com/code/jia.js?uid=1374060136495255" type="text/javascript" charset="utf-8"></script></body></html>
