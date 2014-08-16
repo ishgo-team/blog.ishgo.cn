@@ -1,0 +1,30 @@
+doctype
+html(lang="en")
+  head
+    include _partial/head
+
+  body
+    include _partial/header
+
+    .container.container-sm
+      .row
+        .col-md-9
+          #index-container
+            include _mixins/article
+            - page.posts.each(function(article) {
+              mixin article(article)
+            - });
+
+          include _partial/pagination
+            
+        .col-md-3
+          #sidebar-container
+            aside
+              include _partial/author
+              include _partial/category
+              include _partial/lively
+              include _partial/dynamic
+              include _partial/visitors
+
+    include _partial/footer
+    include _duoshuo/import
