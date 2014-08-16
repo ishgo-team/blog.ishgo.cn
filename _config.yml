@@ -91,6 +91,6 @@ exclude_generator:
 ## Docs: http://hexo.io/docs/deployment.html
 deploy: 
   type: github
-  repository: https://github.com/Barbery/ishgo-team-blog.git
+  repository: https://github.com/ishgo-team/blog.ishgo.cn.git
   branch: gh-pages
   message: hexo deploy
