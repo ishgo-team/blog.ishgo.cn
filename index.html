@@ -1,30 +1,37 @@
-doctype
-html(lang="en")
-  head
-    include _partial/head
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ishgo Blog</title><meta name="description" content="技术交流博客"><meta property="og:site_name" content="Ishgo Blog"><meta property="og:image"><link href="/ico/apple-touch-icon-114-precomposed.png" sizes="144x144" rel="apple-touch-icon-precomposed"><link href="/ico/favicon.png" rel="shortcut icon"><link href="/css/bootstrap.min.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/app.css" rel="stylesheet"><script type="text/javascript">var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F47e4c82bef82fd59f14adad5b8d9e28e' type='text/javascript'%3E%3C/script%3E"));</script></head><body><header id="header-container" class="navbar navbar-inverse navbar-static-top"><div class="container"><a href="/" role="banner" class="navbar-brand">ishgo</a><ul class="nav pull-right"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="http://about.ishgo.cn">关于我们</a></li></ul></div></header><div class="container container-sm"><div class="row"><div class="col-md-9"><div id="index-container"><article class="article"><a href="/2013/09/18/说说怎么部署静态网站到github上/" title="说说怎么部署静态网站到github上" class="title"><h3>说说怎么部署静态网站到github上</h3></a><div class="post-info clearfix"><div class="author"><i class="fa fa-user"></i><a href="http://www.stutostu.com/?page_id=5" title="Barbery" rel="author" class="name">&nbsp;By&nbsp;<span>Barbery</span></a></div><div class="tags"><i class="fa fa-tag"></i>&nbsp;<a href="/tags/github-pages/" title="github pages">github pages</a><a href="/tags/部署/" title="部署">部署</a><a href="/tags/HTML/" title="HTML">HTML</a></div><time datetime="2013-09-17T16:01:09.000Z" class="date"><i class="fa fa-clock-o"></i>&nbsp;<span>Sep 18 2013</span></time><div class="comments"><i class="fa fa-comments"></i>&nbsp;<span data-thread-key="2013%2F09%2F18%2F%E8%AF%B4%E8%AF%B4%E6%80%8E%E4%B9%88%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E5%88%B0github%E4%B8%8A%2F" data-count-type="comments" class="ds-thread-count"></span></div></div><div class="content clearfix"><ol>
+<li><p>首先, 第一步当然要先到github上建立一个repo. 什么? 你找不到哪里创建?看下图<br><img src="http://ww4.sinaimg.cn/large/6915c7dcgw1e8pwx8oth8j20ax05ct8q.jpg" alt="看图"></p>
+</li>
+<li><p>填写完必要的信息, 创建完成后, 需要设置一下, 才能让repo里面的html文件publish出去. 废话少说, 看图, 点击下面这个图标进入setting页面<br></div><div class="post-entry-button"><a href="/2013/09/18/说说怎么部署静态网站到github上/" class="btn btn-lg btn-read">阅读全部</a></div></article><article class="article"><a href="/2013/09/15/ishgohexo团队博客主题/" title="用Hexo快速打造静态博客" class="title"><h3>用Hexo快速打造静态博客</h3></a><div class="post-info clearfix"><div class="author"><i class="fa fa-user"></i><a href="https://github.com/DavidKk" title="David Jones" rel="author" class="name">&nbsp;By&nbsp;<span>David Jones</span></a></div><div class="tags"><i class="fa fa-tag"></i>&nbsp;<a href="/tags/Hexo/" title="Hexo">Hexo</a><a href="/tags/静态博客/" title="静态博客">静态博客</a><a href="/tags/自定义/" title="自定义">自定义</a><a href="/tags/博客/" title="博客">博客</a></div><time datetime="2013-09-15T04:00:00.000Z" class="date"><i class="fa fa-clock-o"></i>&nbsp;<span>Sep 15 2013</span></time><div class="comments"><i class="fa fa-comments"></i>&nbsp;<span data-thread-key="2013%2F09%2F15%2Fishgohexo%E5%9B%A2%E9%98%9F%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%2F" data-count-type="comments" class="ds-thread-count"></span></div></div><div class="content clearfix"><p><a href="http://zespia.tw/Hexo/" target="_blank" rel="external">Hexo</a> 是一个基于 <code>Node.js</code> 的静态博客程序, 可以方便的生成静态网页托管在 <code>github</code> 和 <code>Heroku</code> 上。</p>
+<h3 id="为什么要用静态博客？">为什么要用静态博客？</h3>
+<ul>
+<li>跨平台同步文件</li>
+<li>系统简单易懂, 毫不臃肿, 方便改版</li>
+<li>众多第三方应用, 容易做自定义功能扩展</li>
+<li>纯静态, 极低的服务器压力</li>
+<li>最重要使用 <code>Markdown</code> 标记语法, 迁移什么的都非常方便</li>
+<li>能够托管在 <code>Github</code> 上</li>
+</ul>
+<p>下面简单用本博客介绍一下 <code>Hexo</code> 的简单使用扩展等</p>
+<p>利用 <code>Hexo</code> 简单几步就能静态博客了</p>
+</div><div class="post-entry-button"><a href="/2013/09/15/ishgohexo团队博客主题/" class="btn btn-lg btn-read">阅读全部</a></div></article><article class="article"><a href="/2013/09/08/addslashes,mysql_real_escape_string并不能防止SQL注入/" title="addslashes, mysql_real_escape_string并不能防止SQL注入!!!" class="title"><h3>addslashes, mysql_real_escape_string并不能防止SQL注入!!!</h3></a><div class="post-info clearfix"><div class="author"><i class="fa fa-user"></i><a href="http://www.stutostu.com/?page_id=5" title="Barbery" rel="author" class="name">&nbsp;By&nbsp;<span>Barbery</span></a></div><div class="tags"><i class="fa fa-tag"></i>&nbsp;<a href="/tags/ADDSLASHES/" title="ADDSLASHES">ADDSLASHES</a><a href="/tags/MYSQL_REAL_ESCAPE_STRING/" title="MYSQL_REAL_ESCAPE_STRING">MYSQL_REAL_ESCAPE_STRING</a><a href="/tags/PDO/" title="PDO">PDO</a><a href="/tags/PHP/" title="PHP">PHP</a></div><time datetime="2013-09-07T23:56:29.000Z" class="date"><i class="fa fa-clock-o"></i>&nbsp;<span>Sep 8 2013</span></time><div class="comments"><i class="fa fa-comments"></i>&nbsp;<span data-thread-key="2013%2F09%2F08%2Faddslashes%2Cmysql_real_escape_string%E5%B9%B6%E4%B8%8D%E8%83%BD%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5%2F" data-count-type="comments" class="ds-thread-count"></span></div></div><div class="content clearfix"><p>先看代码…</p>
+<pre><code><span class="php"><span class="preprocessor">&lt;?php</span>
+    header(<span class="string">'Content-Type: text/html; charset=GBK'</span>);
+    <span class="variable">$input</span> = chr(<span class="number">0xbf</span>) . chr(<span class="number">0x27</span>) . <span class="string">' OR username = username; /*'</span>;
+    <span class="variable">$value</span> = addslashes(<span class="variable">$input</span>);  
+    <span class="variable">$sql</span> = <span class="string">"SELECT * FROM users WHERE username='{$value}' AND password='123123';"</span>;
 
-  body
-    include _partial/header
-
-    .container.container-sm
-      .row
-        .col-md-9
-          #index-container
-            include _mixins/article
-            - page.posts.each(function(article) {
-              mixin article(article)
-            - });
-
-          include _partial/pagination
-            
-        .col-md-3
-          #sidebar-container
-            aside
-              include _partial/author
-              include _partial/category
-              include _partial/lively
-              include _partial/dynamic
-              include _partial/visitors
-
-    include _partial/footer
-    include _duoshuo/import
+    <span class="keyword">echo</span> <span class="variable">$value</span>;
+    <span class="keyword">echo</span> <span class="variable">$sql</span>;
+<span class="preprocessor">?&gt;</span></span>
+</code></pre><p>以上的demo, 输出结果为:<br><img src="http://ww3.sinaimg.cn/large/6915c7dcgw1e8d0o3a0l1j20lu02uq3c.jpg" alt="http://ww3.sinaimg.cn/large/6915c7dcgw1e8d0o3a0l1j20lu02uq3c.jpg"></p>
+<p>看出问题了吗???</p>
+<p></div><div class="post-entry-button"><a href="/2013/09/08/addslashes,mysql_real_escape_string并不能防止SQL注入/" class="btn btn-lg btn-read">阅读全部</a></div></article><article class="article"><a href="/2013/09/07/ishgo团队技术博客成立啦/" title="ishgo团队技术博客成立啦!!!!" class="title"><h3>ishgo团队技术博客成立啦!!!!</h3></a><div class="post-info clearfix"><div class="author"><i class="fa fa-user"></i><a href="http://www.stutostu.com/?page_id=5" title="Barbery" rel="author" class="name">&nbsp;By&nbsp;<span>Barbery</span></a></div><div class="tags"><i class="fa fa-tag"></i>&nbsp;<a href="/tags/博客/" title="博客">博客</a><a href="/tags/ishgo团队/" title="ishgo团队">ishgo团队</a></div><time datetime="2013-09-06T23:56:29.000Z" class="date"><i class="fa fa-clock-o"></i>&nbsp;<span>Sep 7 2013</span></time><div class="comments"><i class="fa fa-comments"></i>&nbsp;<span data-thread-key="2013%2F09%2F07%2Fishgo%E5%9B%A2%E9%98%9F%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2%E6%88%90%E7%AB%8B%E5%95%A6%2F" data-count-type="comments" class="ds-thread-count"></span></div></div><div class="content clearfix"><p>多得<code>David</code>同学的日夜奋斗, 利用1个周末的时间把博客的代码给搭建出来…<br><br><br>成立这个博客的目的, 主要是响应互联网开源精神, 取之开源, 用之开源~, 把我们在开发我们的主项目 - <strong><a href="http://ishgo.cn" target="_blank" rel="external">ISHGO</a></strong> 时遇到的技术问题写成博文公开, 让更多的人受益互联网的开源…<br><br><br>嘻嘻,这里小预告一下, 下一版本的<strong>ISHGO</strong>打算把基础的框架部分开源出来,<br><strong>ISHGO</strong>的项目就是搭建于这个开源框架之上, 让社区和<strong>ISHGO</strong>团队一起来维护这个框架, 想到这里, 内心不由的小激动的一下, 哈哈哈~~<br><br><br>good luck for us! 希望这次能够达到我们的逾期 !!!!</p>
+</div><div class="post-entry-button"><a href="/2013/09/07/ishgo团队技术博客成立啦/" class="btn btn-lg btn-read">阅读全部</a></div></article></div></div><div class="col-md-3"><div id="sidebar-container"><aside><div class="category_wrap module"><h4 class="caption">文章分类</h4><div class="content"><ul class="list"><li><a href="/categories/PHP/" title="PHP">PHP</a></li><li><a href="/categories/前端/" title="前端">前端</a></li><li><a href="/categories/其他/" title="其他">其他</a></li></ul></div></div><div class="lively_wrap module"><h4 class="caption">热门文章</h4><div class="content"><ul data-range="weekly" data-num-items="5" class="ds-top-threads"></ul></div></div><div class="dynamic_wrap module"><h4 class="caption">最新动态</h4><div class="content"><ul data-num-items="10" class="ds-recent-comments"></ul></div></div><div class="visitors_wrap module"><h4 class="caption">最近访客</h4><div class="content"><ul data-num-items="10" class="ds-recent-visitors"></ul></div></div></aside></div></div></div></div><footer id="footer-container"><div rol="contentinfo" class="container"><div class="links clearfix"><a href="https://github.com" title="github" class="link"><i class="fa fa-github"></i></a><a href="https://twitter.com/twbootstrap" title="twitter" class="link"><i class="fa fa-twitter"></i></a><a href="https://plus.google.com/" title="google_plus" class="link"><i class="fa fa-google-plus"></i></a></div><p class="copyright clearfix">Powered by<a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a>&nbsp;and Theme by<a href="http://blog.ishgo.cn" target="_blank" title="ishgo">iShgo</a>&nbsp;&copy;2013</p></div></footer><script type="text/javascript">var duoshuoQuery = {short_name: "blogishgo"};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = 'http://static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script></body></html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>用Hexo快速打造静态博客 - Ishgo Blog</title><meta name="author" content="David"><meta name="description" content="技术交流博客"><meta property="og:title" content="用Hexo快速打造静态博客"><meta property="og:site_name" content="Ishgo Blog"><meta property="og:image"><link href="/ico/apple-touch-icon-114-precomposed.png" sizes="144x144" rel="apple-touch-icon-precomposed"><link href="/ico/favicon.png" rel="shortcut icon"><link href="/css/bootstrap.min.css" rel="stylesheet"><link href="/css/font-awesome.min.css" rel="stylesheet"><link href="/css/app.css" rel="stylesheet"><script type="text/javascript">var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F47e4c82bef82fd59f14adad5b8d9e28e' type='text/javascript'%3E%3C/script%3E"));</script></head><body><header id="header-container" class="navbar navbar-inverse navbar-static-top"><div class="container"><a href="/" role="banner" class="navbar-brand">ishgo</a><ul class="nav pull-right"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li><li><a href="http://about.ishgo.cn">关于我们</a></li></ul></div></header><div class="container container-sm"><div class="row"><div class="col-md-9"><div id="post-container"><header><a href="" title="用Hexo快速打造静态博客" class="title"><h1>用Hexo快速打造静态博客</h1></a><div class="post-info clearfix"><div class="author"><i class="fa fa-user"></i><a href="https://github.com/DavidKk" title="David Jones" rel="author" class="name">&nbsp;By&nbsp;<span>David Jones</span></a></div><div class="tags"><i class="fa fa-tag"></i>&nbsp;<a href="/tags/Hexo/" title="Hexo">Hexo</a><a href="/tags/静态博客/" title="静态博客">静态博客</a><a href="/tags/自定义/" title="自定义">自定义</a><a href="/tags/博客/" title="博客">博客</a></div><time datetime="2013-09-15T04:00:00.000Z" class="date"><i class="fa fa-clock-o"></i>&nbsp;<span>Sep 15 2013</span></time></div></header><article class="prettify"><p><a href="http://zespia.tw/Hexo/" target="_blank" rel="external">Hexo</a> 是一个基于 <code>Node.js</code> 的静态博客程序, 可以方便的生成静态网页托管在 <code>github</code> 和 <code>Heroku</code> 上。</p>
+<h3 id="为什么要用静态博客？">为什么要用静态博客？</h3>
+<ul>
+<li>跨平台同步文件</li>
+<li>系统简单易懂, 毫不臃肿, 方便改版</li>
+<li>众多第三方应用, 容易做自定义功能扩展</li>
+<li>纯静态, 极低的服务器压力</li>
+<li>最重要使用 <code>Markdown</code> 标记语法, 迁移什么的都非常方便</li>
+<li>能够托管在 <code>Github</code> 上</li>
+</ul>
+<p>下面简单用本博客介绍一下 <code>Hexo</code> 的简单使用扩展等</p>
+<p>利用 <code>Hexo</code> 简单几步就能静态博客了</p>
+<a id="more"></a>
+
+<h3 id="Hexo_轻松搭建">Hexo 轻松搭建</h3>
+<ul>
+<li>安装 <a href="http://nodejs.org/" target="_blank" rel="external">nodejs</a> 和 <a href="https://npmjs.org/" target="_blank" rel="external">npm</a></li>
+<li>npm install Hexo -g</li>
+<li>Hexo init blog — 创建博客</li>
+<li>cd blog</li>
+<li>Hexo server — 本地 Server</li>
+<li>Hexo generate — 生成发布</li>
+<li>修改 <code>blog/_config.yml</code> 中的的参数 <code>url</code> 在2.0+某版本中不为空立刻报错请保证不为空</li>
+</ul>
+<p>具体细节请上 <a href="http://zespia.tw/Hexo/" target="_blank" rel="external">http://zespia.tw/Hexo/</a></p>
+<h3 id="写作">写作</h3>
+<p>在 <code>Hexo init blog</code> 生成的目录中, 将写好的 <code>md</code> 文件, 放入 <code>blog/source/_posts</code> 目录下即可<br>启动 <code>Hexo server</code> 可以边写边看效果, 注意备份好 <code>md</code> 文件方便以后更换系统主题迁移等操作。</p>
+<p>长度控制可以编写 <code>md</code> 时, 添加 <code>&lt;!-- more --&gt;</code> 标签进行分割</p>
+<p>官方默认属性, 通过编写 <code>title</code>, <code>date</code>, <code>author</code>, <code>categories</code>, <code>tags</code> 定义文章和从属分类等,<br>注意 <code>date</code> 必须填写, 否则在更换或迁移平台的时候, 生成的目录会发生变化,<br>因为根据生成当时的日期进行划分目录。(若没有更改 <code>_config.yml</code> 下的 <code>permalink</code> 属性情况下)</p>
+<pre><code><span class="attribute">layout</span>: <span class="string">post</span>
+<span class="attribute">title</span>: <span class="string">用Hexo快速打造静态博客</span>
+<span class="attribute">date</span>: <span class="string">2013-09-15 12:00:00</span>
+<span class="attribute">categories</span>: <span class="string">[前端]</span>
+<span class="attribute">tags</span>: <span class="string">[Hexo, 静态博客, 自定义, 博客, 前端, github]</span>
+</code></pre><h3 id="自定义主题">自定义主题</h3>
+<p>在生成的 <code>blog/themes/</code> 目录下就是所有主题, 可以通过配置 <code>blog/_config.yml</code> 文件中的 <code>theme</code> 进行主题更换, 注意的是修改完配置文件都要重启一下 <code>server</code> 或者 <code>generate</code> 重新生成一下。</p>
+<p>若自行编写主题可能还是使用官方推荐的 <code>ejs</code> 可能会更好, 逻辑比较直观。</p>
+<p>如果想做团队博客要注意 <code>Hexo</code> 环境必须相同, 所以建议将整个 <code>blog</code> 项目共享同步, 否则容易在版本更新时容易出现冲突。</p>
+<h3 id="ishgo主题">ishgo主题</h3>
+<p><code>github</code> 项目地址 <a href="https://github.com/DavidKk/Hexo.ishgo" target="_blank" rel="external">https://github.com/DavidKk/Hexo.ishgo</a></p>
+<h3 id="Informations_-_介绍">Informations - 介绍</h3>
+<p>此主题主要用于团队技术博客而非其他个人博客, 因为主要优化在 <code>Markdown</code> 的代码着色, 着色主要参考 <code>submit Text2</code> 的 <code>monokai colors scheme</code>。</p>
+<p>支持自适应, 采用 <code>bootstapr v3.0</code> , 已经兼容 <code>ie7+</code> 的手脚架, 主要考虑以后 <code>bootstap</code> 有比较好的扩展性和代码规范。</p>
+<p>与官方默认主题不同的是使用 <code>jade</code> 和 <code>less</code> 来打造前端, 而非 <code>ejs</code> 和 <code>styl</code>, 所以安装有点儿麻烦</p>
+<p>如果用于团队请将博客整个共享, 保证代码版本统一。否则在版本更新阶段容易造成代码冲突。</p>
+<p>本主题不支持 <code>ie6</code> 以下版本, 支持 <a href="http://www.ie6nomore.com/" target="_blank" rel="external">ie6nomore</a> 行动。IE6观看会跳到拒绝访问页面。</p>
+<p>评论采用 <code>多说</code>, 侧栏的项目和评论数均由多说技术提供，已配置成本地与真实环境多说同步</p>
+<p>可以添加新的文章属性</p>
+<ul>
+<li><code>author</code> 作者, 根据 <code>ishgo/config.yml</code> 下的 <code>author</code> 进行查找, 如果显示相关信息。</li>
+<li><code>hidden</code> 隐藏用于关于我们之类的文章, 在归档或目录下不会显示, 文章确实存在, 可直接不写。</li>
+</ul>
+<p>实例:</p>
+<pre><code><span class="attribute">author</span>: <span class="string">David</span>
+<span class="attribute">hidden</span>: <span class="string">false</span>
+</code></pre><h3 id="Install_-_安装">Install - 安装</h3>
+<p>打开 <code>Hexo/_config.yml</code> 文件,<br>修改 <code>url</code> 成自己的博客地址, 不能为空,<br>修改 <code>plugins</code> 改成 <code>Hexo-renderer-jade</code> 和 <code>Hexo-renderer-less</code>,<br>修改 <code>theme</code> 属性改成 <code>ishgo</code></p>
+<pre><code><span class="attribute">url</span>: <span class="string">http://blog.ishgo.cn </span>
+
+<span class="haml">plugins:
+-<span class="ruby"> <span class="constant">Hexo</span>-renderer-jade
+</span>-<span class="ruby"> <span class="constant">Hexo</span>-renderer-less
+</span>
+theme: ishgo</span>
+</code></pre><p>修改 <code>Hexo/package.json</code> 的 <code>dependencies</code> 添加 <code>Hexo-renderer-less</code> 和 <code>Hexo-renderer-jade</code> 两项</p>
+<pre><code>{
+    "<span class="attribute">dependencies</span>": <span class="value">{
+        "<span class="attribute">Hexo-renderer-less</span>": <span class="value"><span class="string">"*"</span></span>,
+        "<span class="attribute">Hexo-renderer-jade</span>": <span class="value"><span class="string">"*"</span>
+    </span>}
+</span>}
+</code></pre><p>其中 <code>Hexo-renderer-less</code> 插件, 貌似没有添加压缩选项, 里面的 <code>options</code> 不知道那里设置, 官方文档又神马都没写, 可以将 <code>node_modules/Hexo-renderer-less/index.js</code> 改写 <code>callback</code> 一行改成 <code>callback(null, tree.toCSS({compress: true}));</code>, 这样生成的 <code>css</code> 就会压缩了, 而 <code>jade</code> 默认压缩, 如果没有, 服务器基本上都做了 <code>gzip</code> 压缩, 这个可以忽视。</p>
+<pre><code><span class="keyword">var</span> less = require(<span class="string">'less'</span>),
+path = require(<span class="string">'path'</span>);
+
+hexo.extend.renderer.register(<span class="string">'less'</span>, <span class="string">'css'</span>, <span class="function"><span class="keyword">function</span><span class="params">(data, options, callback)</span> </span>{
+    <span class="keyword">var</span> parser = <span class="keyword">new</span>(less.Parser)({
+        paths: path.dirname(data.path),
+        filename: path.basename(data.path)
+    });
+
+    parser.parse(data.text, <span class="function"><span class="keyword">function</span><span class="params">(err, tree)</span> </span>{
+        <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="keyword">callback</span>(err);
+        <span class="keyword">callback</span>(<span class="literal">null</span>, tree.toCSS({compress: <span class="literal">true</span>}));
+    });
+});
+</code></pre><p>安装 <code>jade</code> 和 <code>less</code></p>
+<pre><code><span class="built_in">cd</span> Hexo/
+npm install
+</code></pre><h3 id="Config_-_配置">Config - 配置</h3>
+<p>通过修改 <code>theme/ishgo/_config.yml</code> 可以自定义博客<br>详细选项说明 <a href="https://github.com/DavidKk/Hexo.ishgo/blob/master/_config.yml" target="_blank" rel="external">https://github.com/DavidKk/Hexo.ishgo/blob/master/_config.yml</a></p>
+<ul>
+<li>site 网站相关设定</li>
+<li>menu 导航菜单</li>
+<li>sidebar 侧栏</li>
+<li>links 友情链接</li>
+<li>author 作者</li>
+<li>其他选项</li>
+</ul>
+<h3 id="技术支持">技术支持</h3>
+<p>最后感谢一些开源项目提供技术支持或服务托管等</p>
+<ul>
+<li><a href="http://zespia.tw/Hexo/" target="_blank" rel="external">Hexo</a></li>
+<li><a href="http://getbootstrap.com/" target="_blank" rel="external">Bootstrap</a></li>
+<li><a href="http://fortawesome.github.io/Font-Awesome/" target="_blank" rel="external">Font-Awesome</a></li>
+<li><a href="http://nodejs.org/" target="_blank" rel="external">Nodejs</a></li>
+<li><a href="github.com">Github</a></li>
+<li><a href="http://jquery.com/" target="_blank" rel="external">jQuery</a></li>
+<li><a href="http://www.duoshuo.com/" target="_blank" rel="external">多说</a></li>
+<li><a href="http://www.jiathis.com/" target="_blank" rel="external">jiathis</a></li>
+</ul>
+</article><div class="tags_wrap clearfix"><div class="caption"><i class="fa fa-tag"></i>&nbsp;</div><ul class="tags"><li><a href="/tags/Hexo/" title="Hexo">Hexo</a></li><li><a href="/tags/静态博客/" title="静态博客">静态博客</a></li><li><a href="/tags/自定义/" title="自定义">自定义</a></li><li><a href="/tags/前端/" title="前端">前端</a></li><li><a href="/tags/github/" title="github">github</a></li><li><a href="/tags/博客/" title="博客">博客</a></li></ul></div><div class="categories_wrap clearfix"><div class="caption"><i class="fa fa-archive"></i>&nbsp;</div><ul class="categorie"><li><a href="/categories/前端/" title="前端">前端</a></li></ul></div><div class="jiathis_style share_wrap clearfix"><div class="caption"></div><span class="jiathis_txt"></span><a class="jiathis_button_ishare">一键分享</a><a class="jiathis_button_tsina">新浪微博</a><a class="jiathis_button_tqq">腾讯微博</a><a class="jiathis_button_fb">Facebook</a><a class="jiathis_button_twitter">Twitter</a><a class="jiathis_button_googleplus">Google+</a><a href="http://www.jiathis.com/share?uid=1832206" target="_blank" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis">更多</a></div><div class="pagination"><a href="/2013/09/18/说说怎么部署静态网站到github上/" title="说说怎么部署静态网站到github上" class="prev">说说怎么部署静态网站到github上</a><a href="/2013/09/08/addslashes,mysql_real_escape_string并不能防止SQL注入/" title="addslashes, mysql_real_escape_string并不能防止SQL注入!!!" class="next">addslashes, mysql_real_escape_string并不能防止SQL注入!!!</a></div><div class="comments_wrap clearfix"><section class="comments"><h4>评论交流</h4><span data-thread-key="2013%2F09%2F15%2Fishgohexo%E5%9B%A2%E9%98%9F%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%2F" data-url="http://blog.ishgo.cn/2013/09/15/ishgohexo团队博客主题/" data-title="用Hexo快速打造静态博客" data-count-type="comments" class="ds-thread"></span></section></div></div></div><div class="col-md-3"><div id="sidebar-container"><aside><div class="author_wrap module"><a href="https://github.com/DavidKk" title="David Jones" class="author"><h4 class="caption">@David Jones</h4></a><div class="content"><a title="David Jones" href="https://github.com/DavidKk" role="author" target="_blank" class="face"><img src="http://s.gravatar.com/avatar/4ae64573bf8a8f5bcf2a3654715b1c3a?s=300"></a><div class="signature"></div><div class="links"><a href="https://github.com/DavidKk" target="_blank" class="link"><i class="fa fa-github"></i></a></div></div></div><div class="category_wrap module"><h4 class="caption">文章分类</h4><div class="content"><ul class="list"><li><a href="/categories/PHP/" title="PHP">PHP</a></li><li><a href="/categories/前端/" title="前端">前端</a></li><li><a href="/categories/其他/" title="其他">其他</a></li></ul></div></div><div class="lively_wrap module"><h4 class="caption">热门文章</h4><div class="content"><ul data-range="weekly" data-num-items="5" class="ds-top-threads"></ul></div></div><div class="dynamic_wrap module"><h4 class="caption">最新动态</h4><div class="content"><ul data-num-items="10" class="ds-recent-comments"></ul></div></div><div class="visitors_wrap module"><h4 class="caption">最近访客</h4><div class="content"><ul data-num-items="10" class="ds-recent-visitors"></ul></div></div></aside></div></div></div></div><footer id="footer-container"><div rol="contentinfo" class="container"><div class="links clearfix"><a href="https://github.com" title="github" class="link"><i class="fa fa-github"></i></a><a href="https://twitter.com/twbootstrap" title="twitter" class="link"><i class="fa fa-twitter"></i></a><a href="https://plus.google.com/" title="google_plus" class="link"><i class="fa fa-google-plus"></i></a></div><p class="copyright clearfix">Powered by<a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a>&nbsp;and Theme by<a href="http://blog.ishgo.cn" target="_blank" title="ishgo">iShgo</a>&nbsp;&copy;2013</p></div></footer><script type="text/javascript">var duoshuoQuery = {short_name: "blogishgo"};
+(function() {
+  var ds = document.createElement('script');
+  ds.type = 'text/javascript';ds.async = true;
+  ds.src = 'http://static.duoshuo.com/embed.js';
+  ds.charset = 'UTF-8';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();</script><script type="text/javascript">var jiathis_config = {
+  data_track_clickback: true,
+  sm: "copy,renren,cqq",
+  pic: "",
+  summary: ""
+};</script><script src="http://v3.jiathis.com/code/jia.js?uid=1374060136495255" type="text/javascript" charset="utf-8"></script></body></html>
